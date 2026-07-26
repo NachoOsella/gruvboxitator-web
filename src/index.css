@@ -1,0 +1,164 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+    --font-heading: var(--font-sans);
+    --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco,
+        "Cascadia Code", "Roboto Mono", monospace;
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/*
+    Gruvbox Material - Dark Hard.
+    Locked palette: the product IS this aesthetic, so the app ships dark-only.
+    Token source: https://github.com/sainnhe/gruvbox-material (dark hard variant).
+*/
+:root {
+    color-scheme: dark;
+    --background: #1d2021;
+    --foreground: #d4be98;
+    --card: #282828;
+    --card-foreground: #d4be98;
+    --popover: #282828;
+    --popover-foreground: #d4be98;
+    --primary: #a9b665;
+    --primary-foreground: #1d2021;
+    --secondary: #32302f;
+    --secondary-foreground: #d4be98;
+    --muted: #32302f;
+    --muted-foreground: #a89984;
+    --accent: #3c3836;
+    --accent-foreground: #ddc7a1;
+    --destructive: #ea6962;
+    --destructive-foreground: #1d2021;
+    --border: #45403d;
+    --input: #504945;
+    --ring: #a9b665;
+    --chart-1: #a9b665;
+    --chart-2: #d8a657;
+    --chart-3: #e78a4e;
+    --chart-4: #7daea3;
+    --chart-5: #d3869b;
+    --radius: 0.75rem;
+    --sidebar: #1d2021;
+    --sidebar-foreground: #d4be98;
+    --sidebar-primary: #a9b665;
+    --sidebar-primary-foreground: #1d2021;
+    --sidebar-accent: #3c3836;
+    --sidebar-accent-foreground: #ddc7a1;
+    --sidebar-border: #45403d;
+    --sidebar-ring: #a9b665;
+    /* Subtle checker used behind transparent images in the preview. */
+    --checker: color-mix(in srgb, #32302f 36%, var(--background));
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+    html {
+        @apply font-sans;
+        -webkit-text-size-adjust: 100%;
+    }
+    body {
+        @apply bg-background text-foreground antialiased;
+        text-rendering: optimizeLegibility;
+    }
+    ::selection {
+        background-color: color-mix(in srgb, var(--primary) 32%, transparent);
+        color: var(--foreground);
+    }
+    ::-webkit-scrollbar {
+        width: 11px;
+        height: 11px;
+    }
+    ::-webkit-scrollbar-track {
+        background: var(--background);
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--bg-solid, #504945);
+        border: 3px solid var(--background);
+        border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #665c54;
+    }
+}
+
+@layer utilities {
+    /* Transparent-image checkerboard for the preview surface. */
+    .gruv-checker {
+        background-color: var(--card);
+        background-image:
+            linear-gradient(45deg, var(--checker) 25%, transparent 25%),
+            linear-gradient(-45deg, var(--checker) 25%, transparent 25%),
+            linear-gradient(45deg, transparent 75%, var(--checker) 75%),
+            linear-gradient(-45deg, transparent 75%, var(--checker) 75%);
+        background-size: 22px 22px;
+        background-position: 0 0, 0 11px, 11px -11px, -11px 0;
+    }
+    /* Single restrained ambient glow for depth on the dark workspace. */
+    .gruv-aura {
+        background:
+            radial-gradient(60% 50% at 12% 0%, color-mix(in srgb, var(--primary) 10%, transparent), transparent 70%),
+            radial-gradient(55% 45% at 100% 100%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%);
+    }
+    /* Tactile noise; only ever applied to a fixed, pointer-events-none layer. */
+    .gruv-grain {
+        background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    }
+}
